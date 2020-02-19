@@ -16,14 +16,14 @@ import com.training.dao.ELearningDAO;
 import com.training.dataproviders.LoginDataProviders;
 import com.training.generics.GenericMethods;
 import com.training.generics.ScreenShot;
-import com.training.pom.LoginSimplePOM;
+import com.training.pom.KirLoginSimplePOM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
 public class LoginDBTest {
 	private WebDriver driver;
 	private String baseUrl;
-	private LoginSimplePOM loginPOM;
+	private KirLoginSimplePOM loginPOM;
 	private static Properties properties;
 	private ScreenShot screenShot;
 	private GenericMethods genericMethods; 
@@ -39,7 +39,7 @@ public class LoginDBTest {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
-		loginPOM = new LoginSimplePOM(driver);
+		loginPOM = new KirLoginSimplePOM(driver);
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver);
 		genericMethods = new GenericMethods(driver); 

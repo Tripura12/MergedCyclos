@@ -7,10 +7,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class LoginComplexPOM11 {
+public class KirLoginComplexPOM11 {
 	private WebDriver driver; 
 	
-	public LoginComplexPOM11(WebDriver driver) {
+	public KirLoginComplexPOM11(WebDriver driver) {
 		this.driver = driver; 
 		PageFactory.initElements(driver, this);
 	}

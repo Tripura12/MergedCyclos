@@ -1,4 +1,3 @@
-
 package com.training.sanity.tests;
 
 import java.io.FileInputStream;
@@ -11,18 +10,18 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.training.dataproviders.LoginDataProviders;
 import com.training.generics.ScreenShot;
-import com.training.pom.ContactAndPaymentPOM;
-import com.training.pom.LoginMediumPOM;
+import com.training.pom.AccountInforPOM;
+import com.training.pom.ComplexXmPOM;
+import com.training.pom.LoginPOM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class LoginMediumTests {
-
+public class ComplexTests {
 	private WebDriver driver;
 	private String baseUrl;
-	private LoginMediumPOM loginPOM;
-	private ContactAndPaymentPOM contactPOM;
+	private ComplexXmPOM  complexXmPOM;
 	private static Properties properties;
 	private ScreenShot screenShot;
 
@@ -36,42 +35,37 @@ public class LoginMediumTests {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
-		loginPOM = new LoginMediumPOM(driver);
-		contactPOM =new ContactAndPaymentPOM(driver);
+		complexXmPOM = new ComplexXmPOM(driver); 
+		//accInfoPOM= new AccountInforPOM(driver);
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		// open the browser 
 		driver.get(baseUrl);
 	}
-	
 	@AfterMethod
 	public void tearDown() throws Exception {
 		Thread.sleep(1000);
 		driver.quit();
 	}
-	@Test (priority=1)
-	public void validLoginTest() throws InterruptedException {
-		loginPOM.sendUserName("prem96");
-		loginPOM.password1();
-		loginPOM.password2();
-		loginPOM.password3();
-		loginPOM.password4();
-		loginPOM.clickLoginBtn();
-		contactPOM.personalBtn();
-		contactPOM.contactsBtn();
-		contactPOM.memloginCb();
-	//	loginPOM.memNameCb();
-		contactPOM.submitBtn();
-		Thread.sleep(3000);
-		contactPOM.AlertHandler();
-		contactPOM.contactList();
-		contactPOM.payBtn();
-		contactPOM.amountCb();
-		contactPOM.description();
-		contactPOM.subBtn();
-		contactPOM.transactionConfirm();
-		contactPOM.toMemberBtn();
-		//screenShot.captureScreenShot("First");
-	}
 	
+  @Test(dataProvider="Cyclos",dataProviderClass=LoginDataProviders.class)
+  public void validLoginTest(String Member_Login, String Amount,String Description) throws Exception {
+	  complexXmPOM.sendUsername("Piku");
+		
+	  complexXmPOM.password1();
+	  complexXmPOM.password2();
+	  complexXmPOM.password3();
+	  complexXmPOM.password4();
+	  complexXmPOM.clickLoginBtn();
+	  
+	  complexXmPOM.account();
+	  complexXmPOM.memberPayment();
+	  complexXmPOM.memberUsername(Member_Login);
+	  complexXmPOM.memberName(Member_Login);
+	  complexXmPOM.amount(Amount);
+	  complexXmPOM.description(Description);
+	 
+	  complexXmPOM.subbtn();
+  }
 }
+

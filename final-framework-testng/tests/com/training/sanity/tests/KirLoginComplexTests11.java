@@ -14,16 +14,16 @@ import org.testng.annotations.Test;
 
 import com.training.dataproviders.LoginDataProviders;
 import com.training.generics.ScreenShot;
-import com.training.pom.LoginComplexPOM11;
+import com.training.pom.KirLoginComplexPOM11;
 
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class LoginComplexTests11 {
+public class KirLoginComplexTests11 {
 
 	private WebDriver driver;
 	private String baseUrl;
-	private LoginComplexPOM11 LoginComplexPOM11 ;
+	private KirLoginComplexPOM11 LoginComplexPOM11 ;
 	private static Properties properties;
 	private ScreenShot screenShot;
 
@@ -37,7 +37,7 @@ public class LoginComplexTests11 {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
-		LoginComplexPOM11 = new LoginComplexPOM11(driver); 
+		LoginComplexPOM11 = new KirLoginComplexPOM11(driver); 
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		// open the browser 

@@ -7,10 +7,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
-public class MemPayAndErrorMsgPOM {
+public class PRMemPayAndErrorMsgPOM {
 private WebDriver driver; 
 	
-	public MemPayAndErrorMsgPOM(WebDriver driver) {
+	public PRMemPayAndErrorMsgPOM(WebDriver driver) {
 		this.driver = driver; 
 		PageFactory.initElements(driver, this);
 	}
@@ -51,7 +51,7 @@ private WebDriver driver;
 	private WebElement description;
 	public void descriptionCheckBox(String des)
 	{
-		this.amount.sendKeys(des);
+		this.description.sendKeys(des);
 	}
 	//*[@id="submitButton"]
 	@FindBy(xpath="//*[@id='submitButton']")

@@ -1,4 +1,4 @@
-package com.training.regression.tests;
+package com.training.sanity.tests;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,29 +8,20 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.training.generics.ScreenShot;
-import com.training.pom.KirLoginSimplePOM;
+import com.training.pom.TriLoginPOM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class LoginMultipleValuesTest {
-	private WebDriver driver; 
-	private String baseUrl; 
-	private KirLoginSimplePOM loginPOM; 
-	private static Properties properties; 
-	private ScreenShot screenShot; 
+public class TriLoginTests {
 
-
-	@DataProvider(name="inputs")
-	public Object[][] getData() {
-		return new Object[][] {
-			{"admin", "admin@123"},
-			{"naveen", "testing@123"}
-		};
-	}
+	private WebDriver driver;
+	private String baseUrl;
+	private TriLoginPOM loginPOM;
+	private static Properties properties;
+	private ScreenShot screenShot;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws IOException {
@@ -42,7 +33,7 @@ public class LoginMultipleValuesTest {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
-		loginPOM = new KirLoginSimplePOM(driver); 
+		loginPOM = new TriLoginPOM(driver); 
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		// open the browser 
@@ -54,17 +45,23 @@ public class LoginMultipleValuesTest {
 		Thread.sleep(1000);
 		driver.quit();
 	}
-	
-	
-	@Test(dataProvider="inputs")
-	public void testMethod1(String userName, String password) {
-		loginPOM.sendUserName(userName);
-		//loginPOM.sendPassword(password);
+	@Test 
+	public void validLoginTest() {
+		loginPOM.sendUserName("admin");
+		loginPOM.sendPassword();
+		loginPOM.clickPassword1();
+		loginPOM.clickPassword2();
+		loginPOM.clickPassword3();
+		loginPOM.clickPassword4();
 		loginPOM.clickLoginBtn(); 
-		loginPOM.messagenav();
-		loginPOM.messages();
-		loginPOM.messagedet();
-		screenShot.captureScreenShot(userName);
+		//screenShot.captureScreenShot("First");
+		loginPOM.ClickHome();
+		loginPOM.sendMemberUserName("manzoor");
+		
+		loginPOM.sendLoanClk();
+		loginPOM.ClickClose();
+		loginPOM.ClickOpen();
+		screenShot.captureScreenShot("First");
+
 	}
-	
 }

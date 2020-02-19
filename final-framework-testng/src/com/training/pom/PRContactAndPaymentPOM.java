@@ -7,10 +7,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
-public class ContactAndPaymentPOM {
+public class PRContactAndPaymentPOM {
 private WebDriver driver; 
 	
-	public ContactAndPaymentPOM(WebDriver driver) {
+	public PRContactAndPaymentPOM(WebDriver driver) {
 		this.driver = driver; 
 		PageFactory.initElements(driver, this);
 	}

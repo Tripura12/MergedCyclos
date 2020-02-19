@@ -4,65 +4,80 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.training.generics.ScreenShot;
-import com.training.pom.LoginPOM;
+import com.training.pom.Ha_SimplePOM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class LoginTests {
+public class Ha_SimpleTests {
 
 	private WebDriver driver;
 	private String baseUrl;
-	private LoginPOM loginPOM;
+	private Ha_SimplePOM loginPOM;
 	private static Properties properties;
 	private ScreenShot screenShot;
 
-	@BeforeClass
+	@BeforeTest
 	public static void setUpBeforeClass() throws IOException {
 		properties = new Properties();
 		FileInputStream inStream = new FileInputStream("./resources/others.properties");
 		properties.load(inStream);
 	}
 
-	@BeforeMethod
+	@BeforeClass
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
-		loginPOM = new LoginPOM(driver); 
+		loginPOM = new Ha_SimplePOM(driver); 
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		// open the browser 
 		driver.get(baseUrl);
 	}
 	
-	@AfterMethod
+	@AfterTest
 	public void tearDown() throws Exception {
-		Thread.sleep(1000);
+		Thread.sleep(10000);
 		driver.quit();
 	}
 	@Test (priority=1)
 	public void validLoginTest() throws InterruptedException {
 		loginPOM.sendUserName("admin");
-		loginPOM.password1();
-		loginPOM.password2();
-		loginPOM.password3();
-		loginPOM.password4();
+		loginPOM.sendClick1();
+		loginPOM.sendClick2();
+		loginPOM.sendClick3();
+		loginPOM.sendClick4();
 		loginPOM.clickLoginBtn();
-		loginPOM.home();
 		Thread.sleep(3000);
-		loginPOM.memberloginfo("manzoor");
-		loginPOM.accountInfoBtn();
-		loginPOM.viewBtn();
-		loginPOM.backBtn();
-		loginPOM.clickLogoutBtn();
-		
-		
-		screenShot.captureScreenShot("First");
 	}
+		
+	@Test (priority=2)
+	public void sendName() {
+		loginPOM.sendName("ma");
+	}
+	
+	@Test (priority=3)
+	public void sendView() {
+		loginPOM.sendView();
+	}
+	@Test (priority=4)
+	public void sendView1() {
+		loginPOM.sendView1();
+	}
+	@Test (priority=5)
+	public void sendBack() {
+		loginPOM.sendBack();
+	}
+		//Alert d=driver.switchTo().alert();
+		//d.accept();
+		//screenShot.captureScreenShot("First");
 	
 }
